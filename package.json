@@ -31,6 +31,7 @@
   },
   "scripts": {
     "start": "craco start",
+    "prestart": "export NODE_OPTIONS=--openssl-legacy-provider",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
@@ -61,5 +62,6 @@
     "@types/react-query": "^1.2.9",
     "@types/react-router-dom": "^5.3.1",
     "@types/styled-components": "^5.1.15"
-  }
+  },
+  "homepage": "https://sson22.github.io/coin-tracker"
 }
