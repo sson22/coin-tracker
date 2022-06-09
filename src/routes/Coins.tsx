@@ -27,7 +27,7 @@ const Coin = styled.li`
   a {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
     transition: color 0.2s ease-in;
   }
   &:hover {
@@ -79,7 +79,7 @@ function Coins() {
       <Helmet>
         <title>CoinTracker</title>
       </Helmet>
-      <Button onClick={toggleDarkAtom}>Toggle Mode</Button>
+      <Button onClick={toggleDarkAtom}>Switch Mode</Button>
       <Header>
         <Title>CoinTracker</Title>
       </Header>

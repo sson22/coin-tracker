@@ -1,5 +1,10 @@
-function Price() {
-  return <h1>Price</h1>;
+import { useQuery } from "react-query";
+import { fetchCoinHistory } from "../api";
+interface PriceProps {
+  coinId: string;
+}
+function Price({ coinId }: PriceProps) {
+  return <h1></h1>;
 }
 
 export default Price;
