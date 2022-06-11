@@ -49,16 +49,7 @@ const Img = styled.img`
   height: 35px;
   margin-right: 10px;
 `;
-const Button = styled.button`
-  font-size: 1em;
-  margin-top: 2em;
-  margin-left: 70%;
-  color: white;
-  background-color: #9c88ff;
-  padding: 0.25em 1em;
-  border: 2px solid #9c88ff;
-  border-radius: 3px;
-`;
+
 interface ICoin {
   id: string;
   name: string;
@@ -71,15 +62,13 @@ interface ICoin {
 interface ICoinsProps {}
 
 function Coins() {
-  const setDarkAtom = useSetRecoilState(isDarkAtom);
-  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   return (
     <Container>
       <Helmet>
         <title>CoinTracker</title>
       </Helmet>
-      <Button onClick={toggleDarkAtom}>Switch Mode</Button>
+
       <Header>
         <Title>CoinTracker</Title>
       </Header>

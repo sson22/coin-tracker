@@ -38,6 +38,13 @@ const Overview = styled.div`
   padding: 10px 20px;
   border-radius: 10px;
 `;
+const Back = styled(Overview)`
+  margin-top: 43px;
+  width: 100px;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+`;
 const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
@@ -157,11 +164,15 @@ function Coin() {
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </title>
       </Helmet>
+      <Back>
+        <Link to="/">Back</Link>
+      </Back>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
       </Header>
+
       {loading ? (
         <Loader>Loading...</Loader>
       ) : (

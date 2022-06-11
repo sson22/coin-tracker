@@ -1,8 +1,8 @@
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { darkTheme, lightTheme } from "./theme";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isDarkAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
@@ -70,12 +70,75 @@ a {
 }
 `;
 
+const Button = styled.div`
+  display: absolute;
+  justigy-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-left: 890px;
+  position: absolute;
+  .checkbox {
+    opacity: 0;
+    position: absolute;
+  }
+
+  .label {
+    width: 50px;
+    height: 26px;
+
+    background-color: transparent;
+    border: solid 1px #9c88ff;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 50px;
+    padding: 5px;
+    align-items: center;
+    position: relative;
+  }
+  .ball {
+    width: 22px;
+    height: 22px;
+    background-color: #9c88ff;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+  }
+  .checkbox:checked + .label .ball {
+    transform: translateX(24px);
+  }
+  .fa-moon {
+    color: #f1c40f;
+  }
+  .fa-sun {
+    color: #f39c12;
+  }
+`;
+
 function App() {
   const isDark = useRecoilValue(isDarkAtom);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
+        <Button>
+          <input
+            onClick={toggleDarkAtom}
+            type="checkbox"
+            className="checkbox"
+            id="checkbox"
+          />
+          <label htmlFor="checkbox" className="label">
+            <i className="fas fa-sun"></i>
+            <i className="fas fa-moon"></i>
+
+            <div className="ball"></div>
+          </label>
+        </Button>
         <Router />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
