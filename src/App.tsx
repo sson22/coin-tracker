@@ -87,7 +87,7 @@ const Button = styled.div`
     height: 26px;
 
     background-color: transparent;
-    border: solid 1px #9c88ff;
+    border: solid 1px ${(props) => props.theme.accentColor};
     display: flex;
     justify-content: space-between;
     border-radius: 50px;
@@ -98,7 +98,7 @@ const Button = styled.div`
   .ball {
     width: 22px;
     height: 22px;
-    background-color: #9c88ff;
+    background-color: ${(props) => props.theme.accentColor};
     position: absolute;
     left: 1px;
     top: 1px;

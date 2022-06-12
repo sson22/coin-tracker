@@ -4,15 +4,25 @@ import { fetchCoinHistory, fetchCoinTickers } from "../api";
 const Overview = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: center;
   height: 200px;
-  padding: 40px;
+  padding: 35px;
   justify-content: space-between;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.5);
 `;
 const PriceBlock = styled.li`
   padding: 5px;
+  color: #d7d7d7;
+`;
+const PriceTitle = styled(PriceBlock)`
+  font-size: 1.2em;
+  font-weight: 1.2;
+  color: white;
+`;
+
+const PriceChange = styled.span<{ isPositive: boolean }>`
+  color: ${(props) => (props.isPositive ? "green" : "red")};
 `;
 interface PriceProps {
   coinId: string;
@@ -60,15 +70,35 @@ function Price({ coinId }: PriceProps) {
       refetchInterval: 10000,
     }
   );
+  const price24h = data?.quotes.USD.percent_change_24h;
+  const price7d = data?.quotes.USD.percent_change_7d;
   return (
     <Overview>
       <ul>
-        <PriceBlock>${data?.quotes.USD.price.toFixed(2)}</PriceBlock>
+        <PriceTitle>
+          Current Price: $ {data?.quotes.USD.price.toFixed(2)}
+        </PriceTitle>
         <PriceBlock>
-          Change over 1h:{data?.quotes.USD.percent_change_1h}%
+          24h% :
+          <PriceChange isPositive={price24h ? price24h > 0 : false}>
+            {price24h
+              ? price24h > 0
+                ? " ▲ " + Math.abs(price24h)
+                : " ▼ " + Math.abs(price24h)
+              : ""}
+            %
+          </PriceChange>
         </PriceBlock>
         <PriceBlock>
-          Change over 24h:{data?.quotes.USD.percent_change_24h}%
+          7d% :
+          <PriceChange isPositive={price7d ? price7d > 0 : false}>
+            {price7d
+              ? price7d > 0
+                ? " ▲ " + Math.abs(price7d)
+                : " ▼ " + Math.abs(price7d)
+              : ""}
+            %
+          </PriceChange>
         </PriceBlock>
         <PriceBlock>Last updated at {data?.last_updated}</PriceBlock>
       </ul>
